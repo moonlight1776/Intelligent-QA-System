@@ -9,39 +9,7 @@ from pyltp import Segmentor
 from pyltp import Postagger  
 from pyltp import NamedEntityRecognizer  
   
-# news_files = codecs.open('input.txt','r',encoding='utf8')
-# news_list = news_files.readlines()
-news_list = []
-news_list.append(input())
-#type(news_list[1].encode('utf-8'))  
-  
-  
-#分句  
-''''' 
-此函数参数输入的格式必须为str格式，所以直接获取的list里的参数值需要 
-通过encode('utf-8')，从Unicode转换为str 
-'''  
-def sentence_splitter(sentence):  
-    sents = SentenceSplitter.split(sentence)  
-    # print('\n'.join(sents))  
-    sents_list = list(sents)  
-    return sents_list  
-      
-  
-#分词     
-def segmentor(sentence):  
-    segmentor = Segmentor()  
-    segmentor.load('/home/wangfeihong/桌面/ltp_data/cws.model')#加载模型  
-    words = segmentor.segment(sentence) #分词  
-    #默认可以这样输出  
-    #print '\t'.join(words)  
-    #可以转化成List输出  
-    word_list = list(words)  
-    segmentor.release()#释放模型  
-    return word_list   
-  
-#词性标注  
-def posttagger(words):  
+#
     postagger = Postagger()  
     postagger.load('/home/wangfeihong/桌面/ltp_data/pos.model')  
     posttags=postagger.postag(words)  #词性标注  
@@ -70,13 +38,7 @@ for sent in sents:
     tags = posttagger(words)  
     nertags = ner(words,tags)  
     for word,nertag in zip(words,nertags):  
-        out_file.write(word+'/'+nertag+' ')  
-out_file.close()  
-
-file=codecs.open('out_nerfile.txt','r',encoding='utf8')  
-file_content = file.read() 
-file_list = file_content.split() 
-#创建两个空列表，分别保存命名实体和构成命名实体短语词组的各个词   
+        out_file.wr词组的各个词   
 ner_list=[]  
 phrase_list=[]
 word_list=[]
